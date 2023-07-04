@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   kong-database:
-    image: postgres:9.6
+    image: postgres:13
     restart: always # Always start every time 
     networks:
       - kong-net
@@ -13,7 +13,7 @@ services:
       - "$KONG_DATABASE_LOCAL_PORT:$KONG_DATABASE_DOCKER_PORT"
 
   kong-migration:
-    image: kong/kong-gateway:2.8.1.0-alpine
+    image: kong/kong-gateway:3.3
     command: "kong migrations bootstrap"
     networks:
       - kong-net
@@ -29,7 +29,7 @@ services:
       - kong-database # Depend on kong-database service 
 
   kong-gateway:
-    image: kong/kong-gateway:2.8.1.0-alpine
+    image: kong/kong-gateway:3.3
     restart: always
     networks:
       - kong-net
