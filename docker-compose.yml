@@ -13,7 +13,7 @@ services:
       - "$KONG_DATABASE_LOCAL_PORT:$KONG_DATABASE_DOCKER_PORT"
 
   kong-migration:
-    image: kong/kong-gateway:3.3
+    image: kong/kong-gateway:3.10
     command: "kong migrations bootstrap"
     networks:
       - kong-net
@@ -29,7 +29,7 @@ services:
       - kong-database # Depend on kong-database service 
 
   kong-gateway:
-    image: kong/kong-gateway:3.3
+    image: kong/kong-gateway:3.10  
     restart: always
     networks:
       - kong-net
